@@ -4,6 +4,7 @@
 /.idea
 .DS_Store
 /build
+app/build
 /captures
 .externalNativeBuild
 .cxx
@@ -11,4 +12,3 @@ local.properties
 *.jks
 *.keystore
 app/google-services.json
-app/src/main/assets/google-services.json
