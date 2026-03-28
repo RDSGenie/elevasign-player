@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ElevaSign Player</string>
+    <string name="pairing_title">ElevaSign</string>
+    <string name="pairing_subtitle">Ingresa el codigo de emparejamiento</string>
+    <string name="pairing_hint">Codigo de 6 digitos</string>
+    <string name="pairing_button">Emparejar pantalla</string>
+    <string name="pairing_error_invalid">Codigo invalido o expirado. Genera uno nuevo en el panel.</string>
+    <string name="pairing_error_network">Sin conexion. Verifica el WiFi.</string>
+    <string name="loading">Cargando contenido\u2026</string>
+    <string name="no_content">Sin contenido asignado.\nCrea una playlist en el panel admin.</string>
+    <string name="device_admin_description">Permite a ElevaSign reiniciar el dispositivo y gestionar kiosk mode.</string>
+</resources>

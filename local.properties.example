@@ -1,0 +1,9 @@
+## ElevaSign Player — local.properties (DO NOT commit this file)
+## Copy this file to local.properties and fill in the values.
+
+# Android SDK path (Android Studio sets this automatically)
+sdk.dir=C\:\\Users\\YourUser\\AppData\\Local\\Android\\Sdk
+
+# Supabase anon key (safe to include in APK, protected by RLS)
+# Find it in: Supabase Dashboard → Project Settings → API → anon public
+SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
