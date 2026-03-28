@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ElevaSign Player</string>
+    <string name="device_admin_description">Permite a ElevaSign reiniciar el dispositivo y gestionar kiosk mode.</string>
+    <string name="gcm_defaultSenderId" translatable="false">371270378238</string>
+    <string name="google_api_key" translatable="false">AIzaSyCk99cJJ1II9lx5fcn00MgYMoPyu3hHoSI</string>
+    <string name="google_app_id" translatable="false">1:371270378238:android:13ba48faddbeeebd597baf</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCk99cJJ1II9lx5fcn00MgYMoPyu3hHoSI</string>
+    <string name="google_storage_bucket" translatable="false">elevasign-48139.firebasestorage.app</string>
+    <string name="loading">Cargando contenido\u2026</string>
+    <string name="no_content">Sin contenido asignado.\nCrea una playlist en el panel admin.</string>
+    <string name="pairing_button">Emparejar pantalla</string>
+    <string name="pairing_error_invalid">Codigo invalido o expirado. Genera uno nuevo en el panel.</string>
+    <string name="pairing_error_network">Sin conexion. Verifica el WiFi.</string>
+    <string name="pairing_hint">Codigo de 6 digitos</string>
+    <string name="pairing_subtitle">Ingresa el codigo de emparejamiento</string>
+    <string name="pairing_title">ElevaSign</string>
+    <string name="project_id" translatable="false">elevasign-48139</string>
+    <style name="Theme.ElevaSign" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@android:color/black</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/black</item>
+    </style>
+</resources>

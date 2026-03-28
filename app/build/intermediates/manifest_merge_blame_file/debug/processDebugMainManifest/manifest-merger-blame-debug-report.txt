@@ -1,0 +1,624 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.elevasign.player"
+4    android:versionCode="1"
+5    android:versionName="1.0.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="24"
+9        android:targetSdkVersion="36" />
+10
+11    <!-- Network -->
+12    <uses-permission android:name="android.permission.INTERNET" />
+12-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:5:5-67
+12-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:5:22-64
+13    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+13-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:6:5-79
+13-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:6:22-76
+14
+15    <!-- Boot auto-start -->
+16    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+16-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:9:5-81
+16-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:9:22-78
+17
+18    <!-- Kiosk / Device Owner -->
+19    <uses-permission android:name="android.permission.REBOOT" />
+19-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:12:5-65
+19-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:12:22-62
+20    <uses-permission android:name="android.permission.BIND_DEVICE_ADMIN" />
+20-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:13:5-76
+20-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:13:22-73
+21
+22    <!-- Foreground services (WorkManager) -->
+23    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+23-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:16:5-77
+23-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:16:22-74
+24    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
+24-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:17:5-87
+24-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:17:22-84
+25
+26    <!-- APK install for self-update -->
+27    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+27-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:20:5-83
+27-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:20:22-80
+28
+29    <!-- Volume control -->
+30    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+30-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:23:5-80
+30-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:23:22-77
+31
+32    <!-- Keeps screen on -->
+33    <uses-permission android:name="android.permission.WAKE_LOCK" />
+33-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:26:5-68
+33-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:26:22-65
+34
+35    <!-- Android TV leanback feature -->
+36    <uses-feature
+36-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:29:5-31:36
+37        android:name="android.software.leanback"
+37-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:30:9-49
+38        android:required="false" />
+38-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:31:9-33
+39    <uses-feature
+39-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:32:5-34:36
+40        android:name="android.hardware.touchscreen"
+40-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:33:9-52
+41        android:required="false" />
+41-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:34:9-33
+42
+43    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" /> <!-- Required by older versions of Google Play services to create IID tokens -->
+43-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a1658100f90549bd5149867f1936459e\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:23:5-77
+43-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a1658100f90549bd5149867f1936459e\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:23:22-74
+44    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+44-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a1658100f90549bd5149867f1936459e\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:26:5-82
+44-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a1658100f90549bd5149867f1936459e\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:26:22-79
+45
+46    <permission
+46-->[androidx.core:core:1.15.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\f9f3c7ddbb36d744acf1edbfa3849edb\transformed\core-1.15.0\AndroidManifest.xml:22:5-24:47
+47        android:name="com.elevasign.player.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+47-->[androidx.core:core:1.15.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\f9f3c7ddbb36d744acf1edbfa3849edb\transformed\core-1.15.0\AndroidManifest.xml:23:9-81
+48        android:protectionLevel="signature" />
+48-->[androidx.core:core:1.15.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\f9f3c7ddbb36d744acf1edbfa3849edb\transformed\core-1.15.0\AndroidManifest.xml:24:9-44
+49
+50    <uses-permission android:name="com.elevasign.player.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+50-->[androidx.core:core:1.15.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\f9f3c7ddbb36d744acf1edbfa3849edb\transformed\core-1.15.0\AndroidManifest.xml:26:5-97
+50-->[androidx.core:core:1.15.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\f9f3c7ddbb36d744acf1edbfa3849edb\transformed\core-1.15.0\AndroidManifest.xml:26:22-94
+51
+52    <application
+52-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:36:5-109:19
+53        android:name="com.elevasign.player.ElevaSignApp"
+53-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:37:9-37
+54        android:allowBackup="false"
+54-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:38:9-36
+55        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+55-->[androidx.core:core:1.15.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\f9f3c7ddbb36d744acf1edbfa3849edb\transformed\core-1.15.0\AndroidManifest.xml:28:18-86
+56        android:banner="@drawable/ic_launcher_background"
+56-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:39:9-58
+57        android:debuggable="true"
+58        android:extractNativeLibs="false"
+59        android:icon="@drawable/ic_launcher_background"
+59-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:40:9-56
+60        android:label="@string/app_name"
+60-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:41:9-41
+61        android:supportsRtl="true"
+61-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:42:9-35
+62        android:theme="@style/Theme.ElevaSign" >
+62-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:43:9-47
+63
+64        <!-- Main activity: single-task, fullscreen, kiosk -->
+65        <activity
+65-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:46:9-61:20
+66            android:name="com.elevasign.player.MainActivity"
+66-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:47:13-41
+67            android:configChanges="orientation|screenSize|keyboardHidden"
+67-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:48:13-74
+68            android:exported="true"
+68-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:49:13-36
+69            android:launchMode="singleTask"
+69-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:50:13-44
+70            android:noHistory="false"
+70-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:51:13-38
+71            android:screenOrientation="landscape"
+71-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:52:13-50
+72            android:showWhenLocked="true"
+72-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:53:13-42
+73            android:turnScreenOn="true" >
+73-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:54:13-40
+74            <intent-filter>
+74-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:55:13-60:29
+75                <action android:name="android.intent.action.MAIN" />
+75-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:56:17-69
+75-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:56:25-66
+76
+77                <category android:name="android.intent.category.LAUNCHER" />
+77-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:57:17-77
+77-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:57:27-74
+78                <!-- Android TV launcher -->
+79                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
+79-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:59:17-86
+79-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:59:27-83
+80            </intent-filter>
+81        </activity>
+82
+83        <!-- Auto-start on boot -->
+84        <receiver
+84-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:64:9-72:20
+85            android:name="com.elevasign.player.receiver.BootReceiver"
+85-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:65:13-50
+86            android:enabled="true"
+86-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:66:13-35
+87            android:exported="true" >
+87-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:67:13-36
+88            <intent-filter android:priority="1000" >
+88-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:68:13-71:29
+88-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:68:28-51
+89                <action android:name="android.intent.action.BOOT_COMPLETED" />
+89-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:69:17-79
+89-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:69:25-76
+90                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+90-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:70:17-82
+90-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:70:25-79
+91            </intent-filter>
+92        </receiver>
+93
+94        <!-- Device admin for kiosk/reboot commands -->
+95        <receiver
+95-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:75:9-85:20
+96            android:name="com.elevasign.player.receiver.DeviceAdminReceiver"
+96-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:76:13-57
+97            android:exported="true"
+97-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:77:13-36
+98            android:permission="android.permission.BIND_DEVICE_ADMIN" >
+98-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:78:13-70
+99            <meta-data
+99-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:79:13-81:56
+100                android:name="android.app.device_admin"
+100-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:80:17-56
+101                android:resource="@xml/device_admin" />
+101-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:81:17-53
+102
+103            <intent-filter>
+103-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:82:13-84:29
+104                <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
+104-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:83:17-82
+104-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:83:25-79
+105            </intent-filter>
+106        </receiver>
+107
+108        <!-- Firebase Cloud Messaging -->
+109        <service
+109-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:88:9-94:19
+110            android:name="com.elevasign.player.service.FCMService"
+110-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:89:13-47
+111            android:exported="false" >
+111-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:90:13-37
+112            <intent-filter>
+112-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:91:13-93:29
+113                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+113-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:92:17-78
+113-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:92:25-75
+114            </intent-filter>
+115        </service>
+116
+117        <!-- WorkManager provider (Hilt) -->
+118        <provider
+119            android:name="androidx.startup.InitializationProvider"
+119-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:98:13-67
+120            android:authorities="com.elevasign.player.androidx-startup"
+120-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:99:13-68
+121            android:exported="false" >
+121-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:100:13-37
+122            <meta-data
+122-->[androidx.lifecycle:lifecycle-process:2.8.7] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a0f04baf74cb540cfa4267e81d6da6fe\transformed\lifecycle-process-2.8.7\AndroidManifest.xml:29:13-31:52
+123                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+123-->[androidx.lifecycle:lifecycle-process:2.8.7] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a0f04baf74cb540cfa4267e81d6da6fe\transformed\lifecycle-process-2.8.7\AndroidManifest.xml:30:17-78
+124                android:value="androidx.startup" />
+124-->[androidx.lifecycle:lifecycle-process:2.8.7] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a0f04baf74cb540cfa4267e81d6da6fe\transformed\lifecycle-process-2.8.7\AndroidManifest.xml:31:17-49
+125            <meta-data
+125-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\d9799ea597c69eca0bf90ed2bc341e59\transformed\emoji2-1.3.0\AndroidManifest.xml:29:13-31:52
+126                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+126-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\d9799ea597c69eca0bf90ed2bc341e59\transformed\emoji2-1.3.0\AndroidManifest.xml:30:17-75
+127                android:value="androidx.startup" />
+127-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\d9799ea597c69eca0bf90ed2bc341e59\transformed\emoji2-1.3.0\AndroidManifest.xml:31:17-49
+128            <meta-data
+128-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a66228360449bd96263f6fd3384ff8df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:29:13-31:52
+129                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+129-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a66228360449bd96263f6fd3384ff8df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:30:17-85
+130                android:value="androidx.startup" />
+130-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a66228360449bd96263f6fd3384ff8df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:31:17-49
+131        </provider>
+132
+133        <service
+133-->[com.google.firebase:firebase-messaging-ktx:24.1.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\4cae86d86c767d0e32be3860d0f937fc\transformed\firebase-messaging-ktx-24.1.0\AndroidManifest.xml:23:9-29:19
+134            android:name="com.google.firebase.components.ComponentDiscoveryService"
+134-->[com.google.firebase:firebase-messaging-ktx:24.1.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\4cae86d86c767d0e32be3860d0f937fc\transformed\firebase-messaging-ktx-24.1.0\AndroidManifest.xml:24:13-84
+135            android:directBootAware="true"
+135-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\5145a60ff7a00546655dff197427c4af\transformed\firebase-common-21.0.0\AndroidManifest.xml:32:13-43
+136            android:exported="false" >
+136-->[com.google.firebase:firebase-messaging-ktx:24.1.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\4cae86d86c767d0e32be3860d0f937fc\transformed\firebase-messaging-ktx-24.1.0\AndroidManifest.xml:25:13-37
+137            <meta-data
+137-->[com.google.firebase:firebase-messaging-ktx:24.1.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\4cae86d86c767d0e32be3860d0f937fc\transformed\firebase-messaging-ktx-24.1.0\AndroidManifest.xml:26:13-28:85
+138                android:name="com.google.firebase.components:com.google.firebase.messaging.ktx.FirebaseMessagingLegacyRegistrar"
+138-->[com.google.firebase:firebase-messaging-ktx:24.1.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\4cae86d86c767d0e32be3860d0f937fc\transformed\firebase-messaging-ktx-24.1.0\AndroidManifest.xml:27:17-129
+139                android:value="com.google.firebase.components.ComponentRegistrar" />
+139-->[com.google.firebase:firebase-messaging-ktx:24.1.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\4cae86d86c767d0e32be3860d0f937fc\transformed\firebase-messaging-ktx-24.1.0\AndroidManifest.xml:28:17-82
+140            <meta-data
+140-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a1658100f90549bd5149867f1936459e\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:57:13-59:85
+141                android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingKtxRegistrar"
+141-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a1658100f90549bd5149867f1936459e\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:58:17-122
+142                android:value="com.google.firebase.components.ComponentRegistrar" />
+142-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a1658100f90549bd5149867f1936459e\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:59:17-82
+143            <meta-data
+143-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a1658100f90549bd5149867f1936459e\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:60:13-62:85
+144                android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingRegistrar"
+144-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a1658100f90549bd5149867f1936459e\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:61:17-119
+145                android:value="com.google.firebase.components.ComponentRegistrar" />
+145-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a1658100f90549bd5149867f1936459e\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:62:17-82
+146            <meta-data
+146-->[com.google.firebase:firebase-installations:18.0.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\28b6671ad6e2833b5c5ff225c78c488b\transformed\firebase-installations-18.0.0\AndroidManifest.xml:15:13-17:85
+147                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsKtxRegistrar"
+147-->[com.google.firebase:firebase-installations:18.0.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\28b6671ad6e2833b5c5ff225c78c488b\transformed\firebase-installations-18.0.0\AndroidManifest.xml:16:17-130
+148                android:value="com.google.firebase.components.ComponentRegistrar" />
+148-->[com.google.firebase:firebase-installations:18.0.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\28b6671ad6e2833b5c5ff225c78c488b\transformed\firebase-installations-18.0.0\AndroidManifest.xml:17:17-82
+149            <meta-data
+149-->[com.google.firebase:firebase-installations:18.0.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\28b6671ad6e2833b5c5ff225c78c488b\transformed\firebase-installations-18.0.0\AndroidManifest.xml:18:13-20:85
+150                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
+150-->[com.google.firebase:firebase-installations:18.0.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\28b6671ad6e2833b5c5ff225c78c488b\transformed\firebase-installations-18.0.0\AndroidManifest.xml:19:17-127
+151                android:value="com.google.firebase.components.ComponentRegistrar" />
+151-->[com.google.firebase:firebase-installations:18.0.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\28b6671ad6e2833b5c5ff225c78c488b\transformed\firebase-installations-18.0.0\AndroidManifest.xml:20:17-82
+152            <meta-data
+152-->[com.google.firebase:firebase-common-ktx:21.0.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\140ddc7e5327df37b7c30fb9edcf9349\transformed\firebase-common-ktx-21.0.0\AndroidManifest.xml:12:13-14:85
+153                android:name="com.google.firebase.components:com.google.firebase.ktx.FirebaseCommonLegacyRegistrar"
+153-->[com.google.firebase:firebase-common-ktx:21.0.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\140ddc7e5327df37b7c30fb9edcf9349\transformed\firebase-common-ktx-21.0.0\AndroidManifest.xml:13:17-116
+154                android:value="com.google.firebase.components.ComponentRegistrar" />
+154-->[com.google.firebase:firebase-common-ktx:21.0.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\140ddc7e5327df37b7c30fb9edcf9349\transformed\firebase-common-ktx-21.0.0\AndroidManifest.xml:14:17-82
+155            <meta-data
+155-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\5145a60ff7a00546655dff197427c4af\transformed\firebase-common-21.0.0\AndroidManifest.xml:35:13-37:85
+156                android:name="com.google.firebase.components:com.google.firebase.FirebaseCommonKtxRegistrar"
+156-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\5145a60ff7a00546655dff197427c4af\transformed\firebase-common-21.0.0\AndroidManifest.xml:36:17-109
+157                android:value="com.google.firebase.components.ComponentRegistrar" />
+157-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\5145a60ff7a00546655dff197427c4af\transformed\firebase-common-21.0.0\AndroidManifest.xml:37:17-82
+158            <meta-data
+158-->[com.google.firebase:firebase-datatransport:18.2.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\490b5b29d46faa4c0b78f0dbd39e123d\transformed\firebase-datatransport-18.2.0\AndroidManifest.xml:25:13-27:85
+159                android:name="com.google.firebase.components:com.google.firebase.datatransport.TransportRegistrar"
+159-->[com.google.firebase:firebase-datatransport:18.2.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\490b5b29d46faa4c0b78f0dbd39e123d\transformed\firebase-datatransport-18.2.0\AndroidManifest.xml:26:17-115
+160                android:value="com.google.firebase.components.ComponentRegistrar" />
+160-->[com.google.firebase:firebase-datatransport:18.2.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\490b5b29d46faa4c0b78f0dbd39e123d\transformed\firebase-datatransport-18.2.0\AndroidManifest.xml:27:17-82
+161        </service>
+162
+163        <receiver
+163-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a1658100f90549bd5149867f1936459e\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:29:9-40:20
+164            android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
+164-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a1658100f90549bd5149867f1936459e\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:30:13-78
+165            android:exported="true"
+165-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a1658100f90549bd5149867f1936459e\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:31:13-36
+166            android:permission="com.google.android.c2dm.permission.SEND" >
+166-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a1658100f90549bd5149867f1936459e\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:32:13-73
+167            <intent-filter>
+167-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a1658100f90549bd5149867f1936459e\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:33:13-35:29
+168                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+168-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a1658100f90549bd5149867f1936459e\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:34:17-81
+168-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a1658100f90549bd5149867f1936459e\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:34:25-78
+169            </intent-filter>
+170
+171            <meta-data
+171-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a1658100f90549bd5149867f1936459e\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:37:13-39:40
+172                android:name="com.google.android.gms.cloudmessaging.FINISHED_AFTER_HANDLED"
+172-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a1658100f90549bd5149867f1936459e\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:38:17-92
+173                android:value="true" />
+173-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a1658100f90549bd5149867f1936459e\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:39:17-37
+174        </receiver>
+175        <!--
+176             FirebaseMessagingService performs security checks at runtime,
+177             but set to not exported to explicitly avoid allowing another app to call it.
+178        -->
+179        <service
+179-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a1658100f90549bd5149867f1936459e\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:46:9-53:19
+180            android:name="com.google.firebase.messaging.FirebaseMessagingService"
+180-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a1658100f90549bd5149867f1936459e\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:47:13-82
+181            android:directBootAware="true"
+181-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a1658100f90549bd5149867f1936459e\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:48:13-43
+182            android:exported="false" >
+182-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a1658100f90549bd5149867f1936459e\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:49:13-37
+183            <intent-filter android:priority="-500" >
+183-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:91:13-93:29
+184                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+184-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:92:17-78
+184-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:92:25-75
+185            </intent-filter>
+186        </service>
+187
+188        <activity
+188-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\c1dcabbebfadff74f11584f607f7cbb1\transformed\play-services-base-18.0.1\AndroidManifest.xml:20:9-22:45
+189            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+189-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\c1dcabbebfadff74f11584f607f7cbb1\transformed\play-services-base-18.0.1\AndroidManifest.xml:20:19-85
+190            android:exported="false"
+190-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\c1dcabbebfadff74f11584f607f7cbb1\transformed\play-services-base-18.0.1\AndroidManifest.xml:22:19-43
+191            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+191-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\c1dcabbebfadff74f11584f607f7cbb1\transformed\play-services-base-18.0.1\AndroidManifest.xml:21:19-78
+192
+193        <provider
+193-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\5145a60ff7a00546655dff197427c4af\transformed\firebase-common-21.0.0\AndroidManifest.xml:23:9-28:39
+194            android:name="com.google.firebase.provider.FirebaseInitProvider"
+194-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\5145a60ff7a00546655dff197427c4af\transformed\firebase-common-21.0.0\AndroidManifest.xml:24:13-77
+195            android:authorities="com.elevasign.player.firebaseinitprovider"
+195-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\5145a60ff7a00546655dff197427c4af\transformed\firebase-common-21.0.0\AndroidManifest.xml:25:13-72
+196            android:directBootAware="true"
+196-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\5145a60ff7a00546655dff197427c4af\transformed\firebase-common-21.0.0\AndroidManifest.xml:26:13-43
+197            android:exported="false"
+197-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\5145a60ff7a00546655dff197427c4af\transformed\firebase-common-21.0.0\AndroidManifest.xml:27:13-37
+198            android:initOrder="100" />
+198-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\5145a60ff7a00546655dff197427c4af\transformed\firebase-common-21.0.0\AndroidManifest.xml:28:13-36
+199
+200        <service
+200-->[androidx.room:room-runtime:2.6.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\1df9447255d13ed5662394a763b43d06\transformed\room-runtime-2.6.1\AndroidManifest.xml:24:9-28:63
+201            android:name="androidx.room.MultiInstanceInvalidationService"
+201-->[androidx.room:room-runtime:2.6.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\1df9447255d13ed5662394a763b43d06\transformed\room-runtime-2.6.1\AndroidManifest.xml:25:13-74
+202            android:directBootAware="true"
+202-->[androidx.room:room-runtime:2.6.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\1df9447255d13ed5662394a763b43d06\transformed\room-runtime-2.6.1\AndroidManifest.xml:26:13-43
+203            android:exported="false" />
+203-->[androidx.room:room-runtime:2.6.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\1df9447255d13ed5662394a763b43d06\transformed\room-runtime-2.6.1\AndroidManifest.xml:27:13-37
+204        <service
+204-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:39:9-45:35
+205            android:name="androidx.work.impl.background.systemalarm.SystemAlarmService"
+205-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:40:13-88
+206            android:directBootAware="false"
+206-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:41:13-44
+207            android:enabled="@bool/enable_system_alarm_service_default"
+207-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:42:13-72
+208            android:exported="false" />
+208-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:43:13-37
+209        <service
+209-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:46:9-52:35
+210            android:name="androidx.work.impl.background.systemjob.SystemJobService"
+210-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:47:13-84
+211            android:directBootAware="false"
+211-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:48:13-44
+212            android:enabled="@bool/enable_system_job_service_default"
+212-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:49:13-70
+213            android:exported="true"
+213-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:50:13-36
+214            android:permission="android.permission.BIND_JOB_SERVICE" />
+214-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:51:13-69
+215        <service
+215-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:53:9-59:35
+216            android:name="androidx.work.impl.foreground.SystemForegroundService"
+216-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:54:13-81
+217            android:directBootAware="false"
+217-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:55:13-44
+218            android:enabled="@bool/enable_system_foreground_service_default"
+218-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:56:13-77
+219            android:exported="false" />
+219-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:57:13-37
+220
+221        <receiver
+221-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:61:9-66:35
+222            android:name="androidx.work.impl.utils.ForceStopRunnable$BroadcastReceiver"
+222-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:62:13-88
+223            android:directBootAware="false"
+223-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:63:13-44
+224            android:enabled="true"
+224-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:64:13-35
+225            android:exported="false" />
+225-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:65:13-37
+226        <receiver
+226-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:67:9-77:20
+227            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryChargingProxy"
+227-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:68:13-106
+228            android:directBootAware="false"
+228-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:69:13-44
+229            android:enabled="false"
+229-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:70:13-36
+230            android:exported="false" >
+230-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:71:13-37
+231            <intent-filter>
+231-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:73:13-76:29
+232                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+232-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:74:17-87
+232-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:74:25-84
+233                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+233-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:75:17-90
+233-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:75:25-87
+234            </intent-filter>
+235        </receiver>
+236        <receiver
+236-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:78:9-88:20
+237            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryNotLowProxy"
+237-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:79:13-104
+238            android:directBootAware="false"
+238-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:80:13-44
+239            android:enabled="false"
+239-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:81:13-36
+240            android:exported="false" >
+240-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:82:13-37
+241            <intent-filter>
+241-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:84:13-87:29
+242                <action android:name="android.intent.action.BATTERY_OKAY" />
+242-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:85:17-77
+242-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:85:25-74
+243                <action android:name="android.intent.action.BATTERY_LOW" />
+243-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:86:17-76
+243-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:86:25-73
+244            </intent-filter>
+245        </receiver>
+246        <receiver
+246-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:89:9-99:20
+247            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$StorageNotLowProxy"
+247-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:90:13-104
+248            android:directBootAware="false"
+248-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:91:13-44
+249            android:enabled="false"
+249-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:92:13-36
+250            android:exported="false" >
+250-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:93:13-37
+251            <intent-filter>
+251-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:95:13-98:29
+252                <action android:name="android.intent.action.DEVICE_STORAGE_LOW" />
+252-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:96:17-83
+252-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:96:25-80
+253                <action android:name="android.intent.action.DEVICE_STORAGE_OK" />
+253-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:97:17-82
+253-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:97:25-79
+254            </intent-filter>
+255        </receiver>
+256        <receiver
+256-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:100:9-109:20
+257            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$NetworkStateProxy"
+257-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:101:13-103
+258            android:directBootAware="false"
+258-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:102:13-44
+259            android:enabled="false"
+259-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:103:13-36
+260            android:exported="false" >
+260-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:104:13-37
+261            <intent-filter>
+261-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:106:13-108:29
+262                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+262-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:107:17-79
+262-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:107:25-76
+263            </intent-filter>
+264        </receiver>
+265        <receiver
+265-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:110:9-121:20
+266            android:name="androidx.work.impl.background.systemalarm.RescheduleReceiver"
+266-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:111:13-88
+267            android:directBootAware="false"
+267-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:112:13-44
+268            android:enabled="false"
+268-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:113:13-36
+269            android:exported="false" >
+269-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:114:13-37
+270            <intent-filter>
+270-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:116:13-120:29
+271                <action android:name="android.intent.action.BOOT_COMPLETED" />
+271-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:69:17-79
+271-->C:\Users\Efrain\Projects\elevasign-player\app\src\main\AndroidManifest.xml:69:25-76
+272                <action android:name="android.intent.action.TIME_SET" />
+272-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:118:17-73
+272-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:118:25-70
+273                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+273-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:119:17-81
+273-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:119:25-78
+274            </intent-filter>
+275        </receiver>
+276        <receiver
+276-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:122:9-131:20
+277            android:name="androidx.work.impl.background.systemalarm.ConstraintProxyUpdateReceiver"
+277-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:123:13-99
+278            android:directBootAware="false"
+278-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:124:13-44
+279            android:enabled="@bool/enable_system_alarm_service_default"
+279-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:125:13-72
+280            android:exported="false" >
+280-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:126:13-37
+281            <intent-filter>
+281-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:128:13-130:29
+282                <action android:name="androidx.work.impl.background.systemalarm.UpdateProxies" />
+282-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:129:17-98
+282-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:129:25-95
+283            </intent-filter>
+284        </receiver>
+285        <receiver
+285-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:132:9-142:20
+286            android:name="androidx.work.impl.diagnostics.DiagnosticsReceiver"
+286-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:133:13-78
+287            android:directBootAware="false"
+287-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:134:13-44
+288            android:enabled="true"
+288-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:135:13-35
+289            android:exported="true"
+289-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:136:13-36
+290            android:permission="android.permission.DUMP" >
+290-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:137:13-57
+291            <intent-filter>
+291-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:139:13-141:29
+292                <action android:name="androidx.work.diagnostics.REQUEST_DIAGNOSTICS" />
+292-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:140:17-88
+292-->[androidx.work:work-runtime:2.9.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\7cb2021ac14103e9cc045aac75db5ec0\transformed\work-runtime-2.9.1\AndroidManifest.xml:140:25-85
+293            </intent-filter>
+294        </receiver>
+295
+296        <activity
+296-->[androidx.compose.ui:ui-tooling-android:1.7.6] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\4403a1ab49c3e7ab54f9570048195e76\transformed\ui-tooling-release\AndroidManifest.xml:23:9-25:39
+297            android:name="androidx.compose.ui.tooling.PreviewActivity"
+297-->[androidx.compose.ui:ui-tooling-android:1.7.6] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\4403a1ab49c3e7ab54f9570048195e76\transformed\ui-tooling-release\AndroidManifest.xml:24:13-71
+298            android:exported="true" />
+298-->[androidx.compose.ui:ui-tooling-android:1.7.6] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\4403a1ab49c3e7ab54f9570048195e76\transformed\ui-tooling-release\AndroidManifest.xml:25:13-36
+299
+300        <meta-data
+300-->[com.google.android.gms:play-services-basement:18.3.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\821d0d02f9ca27e8f4f5f248b2f5472c\transformed\play-services-basement-18.3.0\AndroidManifest.xml:21:9-23:69
+301            android:name="com.google.android.gms.version"
+301-->[com.google.android.gms:play-services-basement:18.3.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\821d0d02f9ca27e8f4f5f248b2f5472c\transformed\play-services-basement-18.3.0\AndroidManifest.xml:22:13-58
+302            android:value="@integer/google_play_services_version" />
+302-->[com.google.android.gms:play-services-basement:18.3.0] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\821d0d02f9ca27e8f4f5f248b2f5472c\transformed\play-services-basement-18.3.0\AndroidManifest.xml:23:13-66
+303
+304        <receiver
+304-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a66228360449bd96263f6fd3384ff8df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:34:9-52:20
+305            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+305-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a66228360449bd96263f6fd3384ff8df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:35:13-76
+306            android:directBootAware="false"
+306-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a66228360449bd96263f6fd3384ff8df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:36:13-44
+307            android:enabled="true"
+307-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a66228360449bd96263f6fd3384ff8df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:37:13-35
+308            android:exported="true"
+308-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a66228360449bd96263f6fd3384ff8df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:38:13-36
+309            android:permission="android.permission.DUMP" >
+309-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a66228360449bd96263f6fd3384ff8df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:39:13-57
+310            <intent-filter>
+310-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a66228360449bd96263f6fd3384ff8df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:40:13-42:29
+311                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+311-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a66228360449bd96263f6fd3384ff8df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:41:17-91
+311-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a66228360449bd96263f6fd3384ff8df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:41:25-88
+312            </intent-filter>
+313            <intent-filter>
+313-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a66228360449bd96263f6fd3384ff8df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:43:13-45:29
+314                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+314-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a66228360449bd96263f6fd3384ff8df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:44:17-85
+314-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a66228360449bd96263f6fd3384ff8df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:44:25-82
+315            </intent-filter>
+316            <intent-filter>
+316-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a66228360449bd96263f6fd3384ff8df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:46:13-48:29
+317                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+317-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a66228360449bd96263f6fd3384ff8df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:47:17-88
+317-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a66228360449bd96263f6fd3384ff8df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:47:25-85
+318            </intent-filter>
+319            <intent-filter>
+319-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a66228360449bd96263f6fd3384ff8df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:49:13-51:29
+320                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+320-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a66228360449bd96263f6fd3384ff8df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:50:17-95
+320-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\a66228360449bd96263f6fd3384ff8df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:50:25-92
+321            </intent-filter>
+322        </receiver>
+323
+324        <service
+324-->[com.google.android.datatransport:transport-backend-cct:3.1.9] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\68d805ab144d18be2a08e4ef6ad096aa\transformed\transport-backend-cct-3.1.9\AndroidManifest.xml:28:9-34:19
+325            android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
+325-->[com.google.android.datatransport:transport-backend-cct:3.1.9] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\68d805ab144d18be2a08e4ef6ad096aa\transformed\transport-backend-cct-3.1.9\AndroidManifest.xml:29:13-103
+326            android:exported="false" >
+326-->[com.google.android.datatransport:transport-backend-cct:3.1.9] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\68d805ab144d18be2a08e4ef6ad096aa\transformed\transport-backend-cct-3.1.9\AndroidManifest.xml:30:13-37
+327            <meta-data
+327-->[com.google.android.datatransport:transport-backend-cct:3.1.9] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\68d805ab144d18be2a08e4ef6ad096aa\transformed\transport-backend-cct-3.1.9\AndroidManifest.xml:31:13-33:39
+328                android:name="backend:com.google.android.datatransport.cct.CctBackendFactory"
+328-->[com.google.android.datatransport:transport-backend-cct:3.1.9] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\68d805ab144d18be2a08e4ef6ad096aa\transformed\transport-backend-cct-3.1.9\AndroidManifest.xml:32:17-94
+329                android:value="cct" />
+329-->[com.google.android.datatransport:transport-backend-cct:3.1.9] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\68d805ab144d18be2a08e4ef6ad096aa\transformed\transport-backend-cct-3.1.9\AndroidManifest.xml:33:17-36
+330        </service>
+331        <service
+331-->[com.google.android.datatransport:transport-runtime:3.1.9] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\2481c48899d5071ee998541a09af75a4\transformed\transport-runtime-3.1.9\AndroidManifest.xml:26:9-30:19
+332            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"
+332-->[com.google.android.datatransport:transport-runtime:3.1.9] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\2481c48899d5071ee998541a09af75a4\transformed\transport-runtime-3.1.9\AndroidManifest.xml:27:13-117
+333            android:exported="false"
+333-->[com.google.android.datatransport:transport-runtime:3.1.9] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\2481c48899d5071ee998541a09af75a4\transformed\transport-runtime-3.1.9\AndroidManifest.xml:28:13-37
+334            android:permission="android.permission.BIND_JOB_SERVICE" >
+334-->[com.google.android.datatransport:transport-runtime:3.1.9] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\2481c48899d5071ee998541a09af75a4\transformed\transport-runtime-3.1.9\AndroidManifest.xml:29:13-69
+335        </service>
+336
+337        <receiver
+337-->[com.google.android.datatransport:transport-runtime:3.1.9] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\2481c48899d5071ee998541a09af75a4\transformed\transport-runtime-3.1.9\AndroidManifest.xml:32:9-34:40
+338            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"
+338-->[com.google.android.datatransport:transport-runtime:3.1.9] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\2481c48899d5071ee998541a09af75a4\transformed\transport-runtime-3.1.9\AndroidManifest.xml:33:13-132
+339            android:exported="false" />
+339-->[com.google.android.datatransport:transport-runtime:3.1.9] C:\Users\Efrain\.gradle\caches\8.11.1\transforms\2481c48899d5071ee998541a09af75a4\transformed\transport-runtime-3.1.9\AndroidManifest.xml:34:13-37
+340    </application>
+341
+342</manifest>

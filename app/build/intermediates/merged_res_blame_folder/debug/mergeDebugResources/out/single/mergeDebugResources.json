@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "com.elevasign.player.app-debug-81:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.elevasign.player.app-main-83:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.elevasign.player.app-debug-81:/xml_device_admin.xml.flat",
+        "source": "com.elevasign.player.app-main-83:/xml/device_admin.xml"
+    }
+]

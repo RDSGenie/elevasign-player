@@ -63,7 +63,7 @@ fun TickerOverlay(
         initialValue = containerWidthPx,
         targetValue = -textWidthPx,
         animationSpec = infiniteRepeatable(
-            animation = tween(durationMs = durationMs, easing = LinearEasing),
+            animation = tween(durationMillis = durationMs, easing = LinearEasing),
             repeatMode = RepeatMode.Restart,
         ),
         label = "ticker_x",
