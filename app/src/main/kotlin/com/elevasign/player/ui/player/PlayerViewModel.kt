@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.elevasign.player.data.local.datastore.PlayerPreferences
 import com.elevasign.player.data.local.db.dao.AnnouncementDao
 import com.elevasign.player.data.local.db.entity.MediaItemEntity
+import com.elevasign.player.data.remote.dto.LogPlayRequest
 import com.elevasign.player.data.repository.PlayerRepository
 import com.elevasign.player.domain.model.ActiveAnnouncement
 import com.elevasign.player.domain.model.PlaybackItem
@@ -19,6 +20,7 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import java.time.Instant
@@ -103,8 +105,10 @@ class PlayerViewModel @Inject constructor(
             while (true) {
                 val item = playlist.getOrNull(currentIndex) ?: break
                 val durationMs = item.durationSeconds * 1000L
+                val startedAt = Instant.now().toString()
                 Log.d(TAG, "Playing item ${currentIndex + 1}/${playlist.size}: ${item.mediaId} for ${item.durationSeconds}s")
                 delay(durationMs)
+                logPlay(item, startedAt, durationMs, completed = true)
                 advance()
             }
         }
@@ -119,9 +123,34 @@ class PlayerViewModel @Inject constructor(
     }
 
     fun onVideoEnded() {
-        // Video finished naturally — advance immediately
+        // Video finished naturally — advance immediately, log as completed
         advanceJob?.cancel()
+        val item = playlist.getOrNull(currentIndex)
+        if (item != null) {
+            val durationMs = item.durationSeconds * 1000L
+            logPlay(item, Instant.now().toString(), durationMs, completed = true)
+        }
         advance()
+    }
+
+    private fun logPlay(item: PlaybackItem, playedAt: String, durationMs: Long, completed: Boolean) {
+        viewModelScope.launch {
+            try {
+                val screenId = prefs.screenId.first() ?: return@launch
+                repository.logPlay(
+                    LogPlayRequest(
+                        screenId = screenId,
+                        mediaItemId = item.mediaId,
+                        playlistId = item.playlistId,
+                        durationMs = durationMs,
+                        completed = completed,
+                        playedAt = playedAt,
+                    )
+                )
+            } catch (e: Exception) {
+                Log.w(TAG, "logPlay failed (non-critical): ${e.message}")
+            }
+        }
     }
 
     private fun updateCurrentItem() {

@@ -14,6 +14,7 @@ import com.elevasign.player.data.remote.download.MediaDownloader
 import com.elevasign.player.data.remote.dto.CommandResultRequest
 import com.elevasign.player.data.remote.dto.HeartbeatRequest
 import com.elevasign.player.data.remote.dto.HeartbeatResponse
+import com.elevasign.player.data.remote.dto.LogPlayRequest
 import com.elevasign.player.data.remote.dto.RegisterRequest
 import com.elevasign.player.data.remote.dto.RegisterResponse
 import com.elevasign.player.data.remote.dto.SyncResponse
@@ -152,4 +153,8 @@ class PlayerRepository @Inject constructor(
     suspend fun getContentVersion() = prefs.contentVersion.first()
     suspend fun getManifestHash() = prefs.manifestHash.first()
     suspend fun getScreenId() = prefs.screenId.first()
+
+    suspend fun logPlay(request: LogPlayRequest) = withContext(Dispatchers.IO) {
+        api.logPlay(request)
+    }
 }

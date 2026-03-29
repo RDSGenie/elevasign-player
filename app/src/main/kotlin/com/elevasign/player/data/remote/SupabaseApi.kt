@@ -3,6 +3,7 @@ package com.elevasign.player.data.remote
 import com.elevasign.player.data.remote.dto.CommandResultRequest
 import com.elevasign.player.data.remote.dto.HeartbeatRequest
 import com.elevasign.player.data.remote.dto.HeartbeatResponse
+import com.elevasign.player.data.remote.dto.LogPlayRequest
 import com.elevasign.player.data.remote.dto.RegisterRequest
 import com.elevasign.player.data.remote.dto.RegisterResponse
 import com.elevasign.player.data.remote.dto.SyncResponse
@@ -24,4 +25,7 @@ interface SupabaseApi {
 
     @POST("player-command-result")
     suspend fun commandResult(@Body request: CommandResultRequest)
+
+    @POST("player-log-play")
+    suspend fun logPlay(@Body request: LogPlayRequest)
 }
