@@ -154,6 +154,7 @@ class PlayerRepository @Inject constructor(
      * Announcements can change without bumping content_version.
      */
     suspend fun persistAnnouncements(announcements: List<AnnouncementDto>) = withContext(Dispatchers.IO) {
+        if (announcements.isEmpty()) return@withContext // Don't clear existing announcements
         val entities = announcements.map { ann ->
             AnnouncementEntity(
                 id = ann.id,

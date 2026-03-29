@@ -21,6 +21,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import java.time.Instant
@@ -82,7 +84,17 @@ class PlayerViewModel @Inject constructor(
 
     private fun observeAnnouncements() {
         viewModelScope.launch {
-            announcementDao.observeActive(Instant.now().toString()).collectLatest { entities ->
+            // Ticker refreshes the timestamp every 60s so announcements with
+            // future starts_at become visible without requiring an app restart.
+            val timestampTicker = flow {
+                while (true) {
+                    emit(Instant.now().toString())
+                    delay(60_000)
+                }
+            }
+            timestampTicker.flatMapLatest { now ->
+                announcementDao.observeActive(now)
+            }.collectLatest { entities ->
                 val active = entities.map { entity ->
                     ActiveAnnouncement(
                         id = entity.id,

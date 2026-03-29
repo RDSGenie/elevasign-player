@@ -29,6 +29,7 @@ fun PlayerScreen(
             .background(Color.Black),
         contentAlignment = Alignment.Center,
     ) {
+        // --- Main content layer ---
         when {
             uiState.isLoading -> {
                 Text(
@@ -40,8 +41,8 @@ fun PlayerScreen(
 
             uiState.isEmpty -> {
                 Text(
-                    text = "Sin contenido asignado.\nCrea una playlist en el panel admin.",
-                    color = Color.White.copy(alpha = 0.6f),
+                    text = "Sin contenido asignado.\nConfigure una playlist desde el panel de administración.",
+                    color = Color.White.copy(alpha = 0.5f),
                     style = MaterialTheme.typography.bodyLarge,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.padding(32.dp),
@@ -50,9 +51,7 @@ fun PlayerScreen(
 
             else -> {
                 val item = uiState.currentItem
-
                 if (item != null) {
-                    // --- Main media content ---
                     if (item.isVideo) {
                         VideoPlayer(
                             localPath = item.localPath,
@@ -68,37 +67,34 @@ fun PlayerScreen(
                         )
                     }
                 }
+            }
+        }
 
-                // --- Announcement overlays ---
-                val announcements = uiState.announcements
-                val fullscreen = announcements.firstOrNull {
-                    it.displayType == AnnouncementDisplayType.FULLSCREEN
-                }
-                val overlay = announcements.firstOrNull {
-                    it.displayType == AnnouncementDisplayType.OVERLAY
-                }
-                val ticker = announcements.firstOrNull {
-                    it.displayType == AnnouncementDisplayType.TICKER
-                }
+        // --- Announcement overlays — always rendered on top regardless of playlist state ---
+        val announcements = uiState.announcements
+        if (announcements.isNotEmpty()) {
+            val fullscreen = announcements.firstOrNull {
+                it.displayType == AnnouncementDisplayType.FULLSCREEN
+            }
+            val overlay = announcements.firstOrNull {
+                it.displayType == AnnouncementDisplayType.OVERLAY
+            }
+            val ticker = announcements.firstOrNull {
+                it.displayType == AnnouncementDisplayType.TICKER
+            }
 
-                // Fullscreen announcement takes over entire screen
-                if (fullscreen != null) {
-                    AnnouncementOverlay(announcement = fullscreen, modifier = Modifier.fillMaxSize())
-                } else {
-                    // Overlay (bottom banner) on top of content
-                    if (overlay != null) {
-                        AnnouncementOverlay(announcement = overlay, modifier = Modifier.fillMaxSize())
-                    }
-                    // Ticker at the very bottom
-                    if (ticker != null) {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(bottom = 0.dp),
-                            contentAlignment = Alignment.BottomCenter,
-                        ) {
-                            TickerOverlay(announcement = ticker)
-                        }
+            if (fullscreen != null) {
+                AnnouncementOverlay(announcement = fullscreen, modifier = Modifier.fillMaxSize())
+            } else {
+                if (overlay != null) {
+                    AnnouncementOverlay(announcement = overlay, modifier = Modifier.fillMaxSize())
+                }
+                if (ticker != null) {
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.BottomCenter,
+                    ) {
+                        TickerOverlay(announcement = ticker)
                     }
                 }
             }
