@@ -11,6 +11,7 @@ import com.elevasign.player.data.local.db.entity.MediaItemEntity
 import com.elevasign.player.data.local.file.MediaFileManager
 import com.elevasign.player.data.remote.SupabaseApi
 import com.elevasign.player.data.remote.download.MediaDownloader
+import com.elevasign.player.data.remote.dto.AnnouncementDto
 import com.elevasign.player.data.remote.dto.CommandResultRequest
 import com.elevasign.player.data.remote.dto.HeartbeatRequest
 import com.elevasign.player.data.remote.dto.HeartbeatResponse
@@ -146,6 +147,29 @@ class PlayerRepository @Inject constructor(
                 }
             }
         }
+    }
+
+    /**
+     * Persist announcements independently of content version.
+     * Announcements can change without bumping content_version.
+     */
+    suspend fun persistAnnouncements(announcements: List<AnnouncementDto>) = withContext(Dispatchers.IO) {
+        val entities = announcements.map { ann ->
+            AnnouncementEntity(
+                id = ann.id,
+                title = ann.title,
+                body = ann.body,
+                displayType = ann.displayType,
+                bgColor = ann.bgColor,
+                textColor = ann.textColor,
+                priority = ann.priority,
+                startsAt = ann.startsAt,
+                expiresAt = ann.expiresAt,
+                isActive = ann.isActive,
+            )
+        }
+        announcementDao.deleteAll()
+        announcementDao.upsertAll(entities)
     }
 
     fun observeMediaItems() = mediaItemDao.observeAll()

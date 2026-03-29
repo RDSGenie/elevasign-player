@@ -35,8 +35,11 @@ class SyncManifestUseCase @Inject constructor(
         val localVersion = prefs.contentVersion.first()
         val localHash = prefs.manifestHash.first()
 
+        // Always persist announcements — they can change without bumping content_version
+        repository.persistAnnouncements(remote.announcements)
+
         if (remote.contentVersion <= localVersion && remote.manifestHash == localHash) {
-            Log.d(TAG, "Content unchanged (version=$localVersion), skipping persist")
+            Log.d(TAG, "Content unchanged (version=$localVersion), announcements updated")
             return false
         }
 
