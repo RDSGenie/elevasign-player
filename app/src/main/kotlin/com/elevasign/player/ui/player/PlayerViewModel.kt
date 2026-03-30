@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.elevasign.player.data.local.datastore.PlayerPreferences
 import com.elevasign.player.data.local.db.dao.AnnouncementDao
+import com.elevasign.player.data.local.db.dao.LayoutZoneDao
+import com.elevasign.player.data.local.db.entity.LayoutZoneEntity
 import com.elevasign.player.data.local.db.entity.MediaItemEntity
 import com.elevasign.player.data.remote.dto.LogPlayRequest
 import com.elevasign.player.data.repository.PlayerRepository
@@ -29,11 +31,23 @@ import java.time.Instant
 import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
+data class ZonePlaybackState(
+    val zoneName: String,
+    val currentItem: PlaybackItem? = null,
+    val playbackGeneration: Long = 0,
+    val positionXPercent: Float = 0f,
+    val positionYPercent: Float = 0f,
+    val widthPercent: Float = 100f,
+    val heightPercent: Float = 100f,
+)
+
 data class PlayerUiState(
     val currentItem: PlaybackItem? = null,
     val playlistSize: Int = 0,
     val currentIndex: Int = 0,
-    val playbackGeneration: Long = 0, // increments on every advance to force recomposition
+    val playbackGeneration: Long = 0,
+    val zones: List<ZonePlaybackState> = emptyList(), // for multi-zone layouts
+    val isMultiZone: Boolean = false,
     val announcements: List<ActiveAnnouncement> = emptyList(),
     val isLoading: Boolean = true,
     val isEmpty: Boolean = false,
@@ -43,6 +57,7 @@ data class PlayerUiState(
 class PlayerViewModel @Inject constructor(
     private val repository: PlayerRepository,
     private val announcementDao: AnnouncementDao,
+    private val layoutZoneDao: LayoutZoneDao,
     private val prefs: PlayerPreferences,
 ) : ViewModel() {
 
@@ -53,14 +68,20 @@ class PlayerViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(PlayerUiState())
     val uiState: StateFlow<PlayerUiState> = _uiState.asStateFlow()
 
-    // Emits command IDs for screenshot — handled by PlayerScreen
     private val _screenshotCommand = MutableSharedFlow<String>()
     val screenshotCommand: SharedFlow<String> = _screenshotCommand.asSharedFlow()
 
+    // Single-zone playback state
     private var playlist: List<PlaybackItem> = emptyList()
     private var currentIndex = 0
     private var playbackGeneration = 0L
     private var advanceJob: kotlinx.coroutines.Job? = null
+
+    // Multi-zone playback state
+    private val zonePlaybackData = mutableMapOf<String, MutableList<PlaybackItem>>()
+    private val zoneCurrentIndex = mutableMapOf<String, Int>()
+    private val zoneGeneration = mutableMapOf<String, Long>()
+    private val zoneAdvanceJobs = mutableMapOf<String, kotlinx.coroutines.Job>()
 
     init {
         observePlaylist()
@@ -70,16 +91,100 @@ class PlayerViewModel @Inject constructor(
     private fun observePlaylist() {
         viewModelScope.launch {
             repository.observeMediaItems().collectLatest { entities ->
-                playlist = entities.toPlaybackItems()
-                if (playlist.isEmpty()) {
-                    _uiState.value = PlayerUiState(isLoading = false, isEmpty = true)
-                    advanceJob?.cancel()
+                // Check if we have multi-zone content
+                val zones = try { layoutZoneDao.getAll() } catch (_: Exception) { emptyList() }
+                val hasMultiZone = zones.size > 1
+
+                if (hasMultiZone) {
+                    setupMultiZonePlayback(entities, zones)
                 } else {
-                    currentIndex = currentIndex.coerceIn(0, playlist.size - 1)
-                    updateCurrentItem()
-                    // Don't restart timer when playlist refreshes mid-playback
-                    if (advanceJob?.isActive != true) startAdvanceLoop()
+                    // Single zone (default)
+                    playlist = entities.filter { it.zoneName == "main" || zones.isEmpty() }.toPlaybackItems()
+                    if (playlist.isEmpty()) {
+                        // Try all items regardless of zone
+                        playlist = entities.toPlaybackItems()
+                    }
+                    if (playlist.isEmpty()) {
+                        _uiState.value = _uiState.value.copy(isLoading = false, isEmpty = true, isMultiZone = false, zones = emptyList())
+                        advanceJob?.cancel()
+                    } else {
+                        currentIndex = currentIndex.coerceIn(0, playlist.size - 1)
+                        updateCurrentItem()
+                        if (advanceJob?.isActive != true) startAdvanceLoop()
+                    }
                 }
+            }
+        }
+    }
+
+    private fun setupMultiZonePlayback(entities: List<MediaItemEntity>, zones: List<LayoutZoneEntity>) {
+        // Group media by zone
+        val byZone = entities.groupBy { it.zoneName }
+
+        // Cancel all existing zone jobs
+        zoneAdvanceJobs.values.forEach { it.cancel() }
+        zoneAdvanceJobs.clear()
+
+        val zoneStates = mutableListOf<ZonePlaybackState>()
+        for (zone in zones) {
+            val zoneItems = (byZone[zone.zoneName] ?: emptyList()).toPlaybackItems()
+            zonePlaybackData[zone.zoneName] = zoneItems.toMutableList()
+            if (!zoneCurrentIndex.containsKey(zone.zoneName)) zoneCurrentIndex[zone.zoneName] = 0
+            if (!zoneGeneration.containsKey(zone.zoneName)) zoneGeneration[zone.zoneName] = 0L
+
+            val idx = (zoneCurrentIndex[zone.zoneName] ?: 0).coerceIn(0, (zoneItems.size - 1).coerceAtLeast(0))
+            zoneCurrentIndex[zone.zoneName] = idx
+            zoneGeneration[zone.zoneName] = (zoneGeneration[zone.zoneName] ?: 0) + 1
+
+            zoneStates.add(
+                ZonePlaybackState(
+                    zoneName = zone.zoneName,
+                    currentItem = zoneItems.getOrNull(idx),
+                    playbackGeneration = zoneGeneration[zone.zoneName] ?: 0,
+                    positionXPercent = zone.positionXPercent,
+                    positionYPercent = zone.positionYPercent,
+                    widthPercent = zone.widthPercent,
+                    heightPercent = zone.heightPercent,
+                )
+            )
+
+            // Start independent advance loop for each zone
+            if (zoneItems.isNotEmpty()) {
+                startZoneAdvanceLoop(zone.zoneName, zone)
+            }
+        }
+
+        _uiState.value = _uiState.value.copy(
+            isMultiZone = true,
+            zones = zoneStates,
+            isLoading = false,
+            isEmpty = zoneStates.all { it.currentItem == null },
+        )
+    }
+
+    private fun startZoneAdvanceLoop(zoneName: String, zone: LayoutZoneEntity) {
+        zoneAdvanceJobs[zoneName]?.cancel()
+        zoneAdvanceJobs[zoneName] = viewModelScope.launch {
+            while (true) {
+                val items = zonePlaybackData[zoneName] ?: break
+                val idx = zoneCurrentIndex[zoneName] ?: 0
+                val item = items.getOrNull(idx) ?: break
+                val durationMs = item.durationSeconds * 1000L
+                delay(durationMs)
+                // Advance to next item in this zone
+                val nextIdx = (idx + 1) % items.size
+                zoneCurrentIndex[zoneName] = nextIdx
+                zoneGeneration[zoneName] = (zoneGeneration[zoneName] ?: 0) + 1
+                val nextItem = items.getOrNull(nextIdx)
+                // Update just this zone in the UI state
+                _uiState.value = _uiState.value.copy(
+                    zones = _uiState.value.zones.map { zs ->
+                        if (zs.zoneName == zoneName) zs.copy(
+                            currentItem = nextItem,
+                            playbackGeneration = zoneGeneration[zoneName] ?: 0,
+                        ) else zs
+                    }
+                )
             }
         }
     }

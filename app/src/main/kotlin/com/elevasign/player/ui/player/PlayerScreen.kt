@@ -3,8 +3,12 @@ package com.elevasign.player.ui.player
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -16,6 +20,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -58,10 +63,54 @@ fun PlayerScreen(
                 )
             }
 
+            uiState.isMultiZone && uiState.zones.isNotEmpty() -> {
+                // Multi-zone layout: render each zone at its position
+                BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
+                    val totalWidth = constraints.maxWidth
+                    val totalHeight = constraints.maxHeight
+                    for (zone in uiState.zones) {
+                        val item = zone.currentItem ?: continue
+                        val xPx = (zone.positionXPercent / 100f * totalWidth).toInt()
+                        val yPx = (zone.positionYPercent / 100f * totalHeight).toInt()
+                        val wPx = (zone.widthPercent / 100f * totalWidth).toInt()
+                        val hPx = (zone.heightPercent / 100f * totalHeight).toInt()
+
+                        val density = LocalDensity.current
+                        Box(
+                            modifier = Modifier
+                                .offset(
+                                    x = with(density) { xPx.toDp() },
+                                    y = with(density) { yPx.toDp() },
+                                )
+                                .width(with(density) { wPx.toDp() })
+                                .height(with(density) { hPx.toDp() })
+                                .background(Color.Black),
+                        ) {
+                            androidx.compose.runtime.key(zone.playbackGeneration) {
+                                if (item.isVideo) {
+                                    VideoPlayer(
+                                        localPath = item.localPath,
+                                        remoteUrl = item.fileUrl,
+                                        onVideoEnded = { /* zone loops handle this via timer */ },
+                                        modifier = Modifier.fillMaxSize(),
+                                    )
+                                } else {
+                                    ImageSlide(
+                                        localPath = item.localPath,
+                                        remoteUrl = item.fileUrl,
+                                        modifier = Modifier.fillMaxSize(),
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
             else -> {
+                // Single-zone: fullscreen playback
                 val item = uiState.currentItem
                 if (item != null) {
-                    // key() forces recomposition when generation changes (same video loops)
                     androidx.compose.runtime.key(uiState.playbackGeneration) {
                         if (item.isVideo) {
                             VideoPlayer(

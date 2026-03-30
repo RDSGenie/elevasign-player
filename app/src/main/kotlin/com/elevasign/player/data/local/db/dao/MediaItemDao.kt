@@ -16,6 +16,9 @@ interface MediaItemDao {
     @Query("SELECT * FROM media_items ORDER BY sort_order ASC")
     fun observeAll(): Flow<List<MediaItemEntity>>
 
+    @Query("SELECT * FROM media_items WHERE zone_name = :zoneName ORDER BY sort_order ASC")
+    fun observeByZone(zoneName: String): Flow<List<MediaItemEntity>>
+
     @Query("SELECT * FROM media_items ORDER BY sort_order ASC")
     suspend fun getAll(): List<MediaItemEntity>
 

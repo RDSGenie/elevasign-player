@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class SyncResponse(
     @SerializedName("playlist") val playlist: PlaylistDto?,
+    @SerializedName("zone_playlists") val zonePlaylists: Map<String, PlaylistDto>? = null,
     @SerializedName("announcements") val announcements: List<AnnouncementDto> = emptyList(),
     @SerializedName("layout_zones") val layoutZones: List<LayoutZoneDto> = emptyList(),
     @SerializedName("manifest_hash") val manifestHash: String,

@@ -73,22 +73,55 @@ class PlayerRepository @Inject constructor(
      * Only downloads files not already cached locally.
      */
     suspend fun persistSyncResponse(response: SyncResponse) = withContext(Dispatchers.IO) {
-        val playlist = response.playlist ?: return@withContext
+        // Build media entities from main playlist AND zone playlists
+        val allMediaEntities = mutableListOf<MediaItemEntity>()
 
-        // Build entities
-        val mediaEntities = playlist.items.map { item ->
-            val existingLocal = fileManager.localFile(item.mediaId, item.fileType)
-            MediaItemEntity(
-                mediaId = item.mediaId,
-                fileUrl = item.fileUrl,
-                fileType = item.fileType,
-                displayDurationSeconds = item.displayDuration,
-                sortOrder = item.sortOrder,
-                localPath = if (existingLocal.exists()) existingLocal.absolutePath else null,
-                playlistId = playlist.id,
-                playlistName = playlist.name,
-            )
+        // Main playlist items (zone = "main")
+        val playlist = response.playlist
+        if (playlist != null) {
+            for (item in playlist.items) {
+                val existingLocal = fileManager.localFile(item.mediaId, item.fileType)
+                allMediaEntities.add(
+                    MediaItemEntity(
+                        mediaId = item.mediaId,
+                        fileUrl = item.fileUrl,
+                        fileType = item.fileType,
+                        displayDurationSeconds = item.displayDuration,
+                        sortOrder = item.sortOrder,
+                        localPath = if (existingLocal.exists()) existingLocal.absolutePath else null,
+                        playlistId = playlist.id,
+                        playlistName = playlist.name,
+                        zoneName = "main",
+                    )
+                )
+            }
         }
+
+        // Zone playlists (multi-zone layout)
+        response.zonePlaylists?.forEach { (zoneName, zonePlaylist) ->
+            for (item in zonePlaylist.items) {
+                val existingLocal = fileManager.localFile(item.mediaId, item.fileType)
+                // Use composite key to avoid ID collisions across zones
+                val zoneMediaId = "${item.mediaId}_$zoneName"
+                allMediaEntities.add(
+                    MediaItemEntity(
+                        mediaId = zoneMediaId,
+                        fileUrl = item.fileUrl,
+                        fileType = item.fileType,
+                        displayDurationSeconds = item.displayDuration,
+                        sortOrder = item.sortOrder,
+                        localPath = if (existingLocal.exists()) existingLocal.absolutePath else null,
+                        playlistId = zonePlaylist.id,
+                        playlistName = zonePlaylist.name ?: "",
+                        zoneName = zoneName,
+                    )
+                )
+            }
+        }
+
+        if (allMediaEntities.isEmpty() && playlist == null) return@withContext
+
+        val mediaEntities = allMediaEntities
 
         val announcementEntities = response.announcements.map { ann ->
             AnnouncementEntity(
@@ -130,18 +163,29 @@ class PlayerRepository @Inject constructor(
 
         // Update sync state
         prefs.updateSyncState(response.contentVersion, response.manifestHash)
-        prefs.updateCurrentPlaylist(playlist.id, playlist.name)
+        if (playlist != null) {
+            prefs.updateCurrentPlaylist(playlist.id, playlist.name)
+        }
 
         // Evict old files before downloading
         fileManager.evictIfNeeded(keepIds)
 
-        // Download missing files
-        for (item in playlist.items) {
+        // Download missing files (collect all items from all playlists)
+        val allItems = mutableListOf<com.elevasign.player.data.remote.dto.PlaylistItemDto>()
+        if (playlist != null) allItems.addAll(playlist.items)
+        response.zonePlaylists?.values?.forEach { zp -> allItems.addAll(zp.items) }
+
+        for (item in allItems) {
             val file = fileManager.localFile(item.mediaId, item.fileType)
             if (!file.exists() && item.fileUrl != null) {
                 try {
                     val downloaded = downloader.download(item.fileUrl, item.mediaId, item.fileType)
+                    // Update all entities that reference this media
                     mediaItemDao.updateLocalPath(item.mediaId, downloaded.absolutePath)
+                    // Also update zone copies
+                    mediaEntities.filter { it.fileUrl == item.fileUrl && it.localPath == null }.forEach { e ->
+                        mediaItemDao.updateLocalPath(e.mediaId, downloaded.absolutePath)
+                    }
                 } catch (e: Exception) {
                     Log.w(TAG, "Failed to download ${item.mediaId}: ${e.message}")
                 }

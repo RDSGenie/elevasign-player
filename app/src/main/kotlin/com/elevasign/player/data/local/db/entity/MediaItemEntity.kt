@@ -16,4 +16,5 @@ data class MediaItemEntity(
     @ColumnInfo(name = "local_path") val localPath: String?,
     @ColumnInfo(name = "playlist_id") val playlistId: String,
     @ColumnInfo(name = "playlist_name") val playlistName: String,
+    @ColumnInfo(name = "zone_name", defaultValue = "main") val zoneName: String = "main",
 )

@@ -15,7 +15,7 @@ import com.elevasign.player.data.local.db.entity.MediaItemEntity
         AnnouncementEntity::class,
         LayoutZoneEntity::class,
     ],
-    version = 1,
+    version = 2,
     exportSchema = false,
 )
 abstract class AppDatabase : RoomDatabase() {
