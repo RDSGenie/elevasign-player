@@ -50,7 +50,11 @@ class MainActivity : ComponentActivity() {
                 } else {
                     Screen.Pairing.route
                 }
-                ElevaSignNavGraph(startDestination = startDestination)
+                ElevaSignNavGraph(
+                    startDestination = startDestination,
+                    prefs = prefs,
+                    syncManifest = syncManifest,
+                )
             }
         }
 

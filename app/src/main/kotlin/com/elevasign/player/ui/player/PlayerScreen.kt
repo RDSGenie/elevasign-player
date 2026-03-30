@@ -1,5 +1,6 @@
 package com.elevasign.player.ui.player
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,19 +10,27 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.elevasign.player.data.local.datastore.PlayerPreferences
 import com.elevasign.player.domain.model.AnnouncementDisplayType
+import com.elevasign.player.domain.usecase.SyncManifestUseCase
 
 @Composable
 fun PlayerScreen(
     viewModel: PlayerViewModel = hiltViewModel(),
+    prefs: PlayerPreferences,
+    syncManifest: SyncManifestUseCase,
 ) {
     val uiState by viewModel.uiState.collectAsState()
+    var showSettingsMenu by remember { mutableStateOf(false) }
 
     Box(
         modifier = Modifier
@@ -99,5 +108,19 @@ fun PlayerScreen(
                 }
             }
         }
+
+        // --- Settings menu overlay ---
+        if (showSettingsMenu) {
+            SettingsMenuOverlay(
+                prefs = prefs,
+                syncManifest = syncManifest,
+                onDismiss = { showSettingsMenu = false },
+            )
+        }
+    }
+
+    // BACK button toggles settings menu (single press opens, second press closes)
+    BackHandler {
+        showSettingsMenu = !showSettingsMenu
     }
 }
