@@ -33,6 +33,7 @@ data class PlayerUiState(
     val currentItem: PlaybackItem? = null,
     val playlistSize: Int = 0,
     val currentIndex: Int = 0,
+    val playbackGeneration: Long = 0, // increments on every advance to force recomposition
     val announcements: List<ActiveAnnouncement> = emptyList(),
     val isLoading: Boolean = true,
     val isEmpty: Boolean = false,
@@ -58,6 +59,7 @@ class PlayerViewModel @Inject constructor(
 
     private var playlist: List<PlaybackItem> = emptyList()
     private var currentIndex = 0
+    private var playbackGeneration = 0L
     private var advanceJob: kotlinx.coroutines.Job? = null
 
     init {
@@ -167,10 +169,12 @@ class PlayerViewModel @Inject constructor(
 
     private fun updateCurrentItem() {
         val item = playlist.getOrNull(currentIndex)
+        playbackGeneration++
         _uiState.value = _uiState.value.copy(
             currentItem = item,
             playlistSize = playlist.size,
             currentIndex = currentIndex,
+            playbackGeneration = playbackGeneration,
             isLoading = false,
             isEmpty = item == null,
         )

@@ -61,19 +61,22 @@ fun PlayerScreen(
             else -> {
                 val item = uiState.currentItem
                 if (item != null) {
-                    if (item.isVideo) {
-                        VideoPlayer(
-                            localPath = item.localPath,
-                            remoteUrl = item.fileUrl,
-                            onVideoEnded = { viewModel.onVideoEnded() },
-                            modifier = Modifier.fillMaxSize(),
-                        )
-                    } else {
-                        ImageSlide(
-                            localPath = item.localPath,
-                            remoteUrl = item.fileUrl,
-                            modifier = Modifier.fillMaxSize(),
-                        )
+                    // key() forces recomposition when generation changes (same video loops)
+                    androidx.compose.runtime.key(uiState.playbackGeneration) {
+                        if (item.isVideo) {
+                            VideoPlayer(
+                                localPath = item.localPath,
+                                remoteUrl = item.fileUrl,
+                                onVideoEnded = { viewModel.onVideoEnded() },
+                                modifier = Modifier.fillMaxSize(),
+                            )
+                        } else {
+                            ImageSlide(
+                                localPath = item.localPath,
+                                remoteUrl = item.fileUrl,
+                                modifier = Modifier.fillMaxSize(),
+                            )
+                        }
                     }
                 }
             }
