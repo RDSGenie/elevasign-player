@@ -3,6 +3,7 @@ package com.elevasign.player.ui.player
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -66,7 +67,7 @@ fun PlayerScreen(
                     content = {
                         for (zone in uiState.zones) {
                             val item = zone.currentItem
-                            Box(modifier = Modifier.background(Color.Black)) {
+                            Box(modifier = Modifier.background(Color.Black).clipToBounds()) {
                                 if (item != null) {
                                     androidx.compose.runtime.key(zone.playbackGeneration) {
                                         if (item.isVideo) {
